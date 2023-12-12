@@ -2,7 +2,7 @@ import React from "react";
 import { useMachine } from "@xstate/react";
 import { Nav } from "../Components/Nav";
 import { StepsLayout } from "./StepsLayout";
-import bookingMachine from "../Machines/bookingMachine";
+import { bookingMachine } from "../Machines/bookingMachine";
 import "./BaseLayout.css";
 
 const BaseLayout = () => {
