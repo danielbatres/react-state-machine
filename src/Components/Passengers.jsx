@@ -9,7 +9,7 @@ export const Passengers = ({ state, send }) => {
   };
 
   const goToTicket = () => {
-    send("DONE");
+    send({ type: "DONE" });
   };
 
   const submit = (e) => {

@@ -5,11 +5,13 @@ export const Search = ({ send }) => {
   const [flight, setFlight] = useState("");
 
   const goToPassengers = () => {
-    send("CONTINUE");
+    send({ type: "CONTINUE" });
   };
 
   const handleSelectChange = (event) => {
     setFlight(event.target.value);
+
+    console.log(event.target.value);
   };
 
   const options = ["Mexico", "Venezuela", "Colombia"];
