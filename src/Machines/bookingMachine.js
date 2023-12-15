@@ -1,4 +1,4 @@
-import { assign, createMachine } from 'xstate';
+import { assign, createMachine, fromPromise } from 'xstate';
 import { fetchCountries } from '../Utils/api';
 
 const fillCountries = {
@@ -6,12 +6,11 @@ const fillCountries = {
   states: {
     loading: {
       invoke: {
-        id: "getCountries",
-        src: () => fetchCountries,
+        src: fromPromise(() => fetchCountries()),
         onDone: {
           target: "success",
           actions: assign({
-            countries: ({ event }) => event.data,
+            countries: ({ event }) => event.output,
           }),
         },
         onError: {
@@ -74,7 +73,10 @@ const bookingMachine = createMachine({
     },
     passengers: {
       on: {
-        DONE: "tickets",
+        DONE: {
+          target: "tickets",
+          guard: "moreThanOnePassanger"
+        },
         CANCEL: {
           target: "initial",
           actions: "cleanContext"
@@ -98,6 +100,11 @@ const bookingMachine = createMachine({
       selectedCountry: "",
       passengers: []
     })
+  },
+  guards: {
+    moreThanOnePassanger: ({ context }) => {
+      return context.passengers.length > 0;
+    }
   } 
 });
 

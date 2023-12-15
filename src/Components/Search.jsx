@@ -27,8 +27,8 @@ export const Search = ({ state, send }) => {
           Escoge un país
         </option>
         {options.map((option) => (
-          <option value={option} key={option}>
-            {option}
+          <option value={option.name.common} key={option.name.common}>
+            {option.name.common}
           </option>
         ))}
       </select>
