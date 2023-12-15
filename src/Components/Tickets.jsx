@@ -15,6 +15,9 @@ export const Tickets = ({ send, context }) => {
         <div className="Tickets-country">{context?.selectedCountry}</div>
         <div className="Tickets-passengers">
           <span>✈</span>
+          {context.passengers.map((person, idx) => (
+            <p key={idx}>{person}</p>
+          ))}
         </div>
       </div>
       <button onClick={finish} className="Tickets-finalizar button">
