@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-state-machine/static/css/main.e061c16b.css",
+    "main.js": "/react-state-machine/static/js/main.efae4d27.js",
+    "static/media/background-travel-2.jpg": "/react-state-machine/static/media/background-travel-2.1b3bc05ab3ab53a29ab2.jpg",
+    "index.html": "/react-state-machine/index.html",
+    "main.e061c16b.css.map": "/react-state-machine/static/css/main.e061c16b.css.map",
+    "main.efae4d27.js.map": "/react-state-machine/static/js/main.efae4d27.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e061c16b.css",
+    "static/js/main.efae4d27.js"
+  ]
+}
