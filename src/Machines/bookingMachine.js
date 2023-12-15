@@ -7,17 +7,18 @@ const fillCountries = {
     loading: {
       invoke: {
         id: "getCountries",
-        src: () => fetchCountries(),
+        src: () => fetchCountries,
         onDone: {
           target: "success",
           actions: assign({
-            countries: (context, event) => event.data,
+            countries: ({ event }) => event.data,
           }),
         },
         onError: {
           target: "failure",
           actions: assign({
-            error: "Request failed",
+            error: ({ event }) => event,
+            countries: ["El Salvador"]
           }),
         },
       },
@@ -61,6 +62,12 @@ const bookingMachine = createMachine({
       ...fillCountries,
     },
     tickets: {
+      after: {
+        5000: {
+          target: 'initial',
+          actions: "cleanContext"
+        }
+      },
       on: {
         FINISH: "initial"
       }
@@ -68,7 +75,10 @@ const bookingMachine = createMachine({
     passengers: {
       on: {
         DONE: "tickets",
-        CANCEL: "initial",
+        CANCEL: {
+          target: "initial",
+          actions: "cleanContext"
+        },
         ADD: {
           target: "passengers",
           actions: assign(
@@ -83,7 +93,11 @@ const bookingMachine = createMachine({
    actions: {
     printStart: () => console.log("print start"),
     printEntry: () => console.log("print entry"),
-    printExit: () => console.log("print exit")
+    printExit: () => console.log("print exit"),
+    cleanContext: assign({
+      selectedCountry: "",
+      passengers: []
+    })
   } 
 });
 
